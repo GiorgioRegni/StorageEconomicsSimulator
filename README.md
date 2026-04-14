@@ -49,9 +49,10 @@ Edit only [`src/data/assumptions.ts`](/home/giorgio/Code/StorageEconomicsSimulat
 That file controls:
 
 - 5-year TCO multiplier
-- flash cost per TB
-- HDD cost per TB
-- tape cost per TB
+- total capacity range, currently 1 PB to 10 EB
+- mainstream TLC flash cost per TB raw per year
+- HDD cost per TB raw per year
+- tape cost per TB raw per year
 
 Preset starting mixes and use-case narrative live in [`src/data/presets.ts`](/home/giorgio/Code/StorageEconomicsSimulator/src/data/presets.ts).
 

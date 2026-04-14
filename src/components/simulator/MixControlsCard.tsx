@@ -1,7 +1,12 @@
 import { BrainCircuit, Cloud, RotateCcw, ShieldCheck, SlidersHorizontal } from "lucide-react";
+import {
+  MAX_CAPACITY_PB,
+  MIN_CAPACITY_PB,
+} from "../../data/assumptions";
 import { useCasePresets } from "../../data/presets";
 import { MediaKey } from "../../data/media";
 import { SimulatorState } from "../../hooks/useSimulator";
+import { formatCapacityPB } from "../../lib/utils";
 
 interface MixControlsCardProps {
   simulator: SimulatorState;
@@ -64,7 +69,7 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
             <div>
               <p className="text-sm text-slate-400">Total capacity</p>
               <div className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">
-                {simulator.capacityPB} PB
+                {formatCapacityPB(simulator.capacityPB)}
               </div>
             </div>
             <label className="text-sm text-slate-300">
@@ -72,8 +77,8 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
               <input
                 aria-label="Capacity in petabytes"
                 type="number"
-                min={1}
-                max={50}
+                min={MIN_CAPACITY_PB}
+                max={MAX_CAPACITY_PB}
                 value={simulator.capacityPB}
                 onChange={(event) =>
                   simulator.updateCapacity(Number(event.target.value))
@@ -85,8 +90,8 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
           <input
             aria-label="Total capacity slider"
             type="range"
-            min={1}
-            max={50}
+            min={MIN_CAPACITY_PB}
+            max={MAX_CAPACITY_PB}
             step={1}
             value={simulator.capacityPB}
             onChange={(event) =>
@@ -95,12 +100,16 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
             className="slider mt-5 w-full"
             style={{
               ["--slider-color" as string]: "#47a9ff",
-              ["--fill" as string]: `${(simulator.capacityPB / 50) * 100}%`,
+              ["--fill" as string]: `${
+                ((simulator.capacityPB - MIN_CAPACITY_PB) /
+                  (MAX_CAPACITY_PB - MIN_CAPACITY_PB)) *
+                100
+              }%`,
             }}
           />
           <div className="mt-2 flex justify-between text-xs uppercase tracking-[0.18em] text-slate-500">
-            <span>1 PB</span>
-            <span>50 PB</span>
+            <span>{formatCapacityPB(MIN_CAPACITY_PB)}</span>
+            <span>{formatCapacityPB(MAX_CAPACITY_PB)}</span>
           </div>
         </div>
 

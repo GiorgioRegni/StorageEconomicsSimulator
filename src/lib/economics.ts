@@ -1,4 +1,9 @@
-import { modelAssumptions, TB_PER_PB } from "../data/assumptions";
+import {
+  MAX_CAPACITY_PB,
+  MIN_CAPACITY_PB,
+  modelAssumptions,
+  TB_PER_PB,
+} from "../data/assumptions";
 import { MediaKey } from "../data/media";
 
 export type UseCaseKey = "backup" | "aiDataLake" | "cloud" | "custom";
@@ -10,10 +15,22 @@ export interface MediaMix {
 }
 
 export function calculateEconomics(capacityPB: number, mix: MediaMix) {
+  const mediaCostPerTB = {
+    flash:
+      modelAssumptions.mediaCostPerTBRawYear.flash *
+      modelAssumptions.horizonYears,
+    hdd:
+      modelAssumptions.mediaCostPerTBRawYear.hdd *
+      modelAssumptions.horizonYears,
+    tape:
+      modelAssumptions.mediaCostPerTBRawYear.tape *
+      modelAssumptions.horizonYears,
+  };
+
   const mediaCostPerPB = {
-    flash: modelAssumptions.mediaCostPerTB.flash * TB_PER_PB,
-    hdd: modelAssumptions.mediaCostPerTB.hdd * TB_PER_PB,
-    tape: modelAssumptions.mediaCostPerTB.tape * TB_PER_PB,
+    flash: mediaCostPerTB.flash * TB_PER_PB,
+    hdd: mediaCostPerTB.hdd * TB_PER_PB,
+    tape: mediaCostPerTB.tape * TB_PER_PB,
   };
 
   const baselineCost =
@@ -57,7 +74,10 @@ export function clampCapacity(value: number) {
     return 10;
   }
 
-  return Math.min(50, Math.max(1, Math.round(value)));
+  return Math.min(
+    MAX_CAPACITY_PB,
+    Math.max(MIN_CAPACITY_PB, Math.round(value)),
+  );
 }
 
 export function rebalanceMix(

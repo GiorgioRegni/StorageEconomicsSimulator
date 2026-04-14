@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { formatCapacityPB } from "../../lib/utils";
 import { MixStackBar } from "../charts/MixStackBar";
 import { AnimatedNumber } from "../ui/AnimatedNumber";
 
@@ -32,7 +33,9 @@ export function BaselineCard({
       </div>
 
       <div className="mt-8 border-t border-white/10 pt-6">
-        <div className="text-sm text-slate-400">{capacityPB} PB deployed</div>
+        <div className="text-sm text-slate-400">
+          {formatCapacityPB(capacityPB)} deployed
+        </div>
         <div className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-white">
           <AnimatedNumber value={baselineCost} formatter={formatCurrency} />
         </div>
@@ -56,4 +59,3 @@ export function BaselineCard({
     </article>
   );
 }
-

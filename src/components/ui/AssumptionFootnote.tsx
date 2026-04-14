@@ -8,11 +8,11 @@ export function AssumptionFootnote() {
         density, media pricing, and deployment design.
       </p>
       <p>
-        This demo uses a {modelAssumptions.horizonYears}-year TCO lens and a
-        blended lifecycle multiplier of {modelAssumptions.tcoMultiplier.toFixed(2)}
-        x across flash, HDD, and tape.
+        This demo uses annualized $/TB raw CAPEX inputs over a{" "}
+        {modelAssumptions.horizonYears}-year TCO lens, then applies a blended
+        lifecycle multiplier of {modelAssumptions.tcoMultiplier.toFixed(2)}x
+        across mainstream TLC flash, HDD, and tape.
       </p>
     </div>
   );
 }
-
