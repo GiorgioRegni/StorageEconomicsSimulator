@@ -5,7 +5,6 @@ import { HeroSection } from "./components/sections/HeroSection";
 import { MediaCharacteristicsSection } from "./components/sections/MediaCharacteristicsSection";
 import { SavingsBand } from "./components/sections/SavingsBand";
 import { SimulatorSection } from "./components/sections/SimulatorSection";
-import { UseCaseCardsSection } from "./components/sections/UseCaseCardsSection";
 import { useSimulator } from "./hooks/useSimulator";
 
 function App() {
@@ -24,10 +23,6 @@ function App() {
       />
       <SimulatorSection ref={simulatorRef} simulator={simulator} />
       <SavingsBand simulator={simulator} />
-      <UseCaseCardsSection
-        activeUseCase={simulator.selectedUseCase}
-        onSelectUseCase={simulator.selectUseCase}
-      />
       <MediaCharacteristicsSection />
       <CTAFooter
         onRerunModel={scrollToSimulator}
@@ -38,4 +33,3 @@ function App() {
 }
 
 export default App;
-

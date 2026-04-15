@@ -14,21 +14,21 @@ interface SimulatorSectionProps {
 export const SimulatorSection = forwardRef<HTMLElement, SimulatorSectionProps>(
   function SimulatorSection({ simulator }, ref) {
     return (
-      <section ref={ref} className="px-6 py-8 sm:px-8 lg:px-12 lg:py-12">
+      <section ref={ref} className="px-6 py-5 sm:px-8 lg:px-12 lg:py-7">
         <div className="mx-auto max-w-8xl">
-          <div className="mb-8 max-w-3xl">
-            <p className="eyebrow">Interactive model</p>
-            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
-              Put the right tier under the right bytes.
-            </h2>
-            <p className="mt-4 text-base leading-7 text-slate-300 sm:text-lg">
-              Start from all-flash. Reallocate the estate across flash, HDD, and
-              optional tape. The model stays intentionally simple so the cost
-              story stays obvious.
-            </p>
+          <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="eyebrow">Interactive model</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+                Put expensive media where it earns its keep.
+              </h2>
+            </div>
+            <div className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300">
+              5-year illustrative TCO
+            </div>
           </div>
 
-          <div className="grid gap-6 xl:grid-cols-[0.9fr_1.18fr_0.92fr]">
+          <div className="grid gap-4 xl:grid-cols-[0.86fr_1.18fr_0.96fr]">
             <BaselineCard
               capacityPB={simulator.capacityPB}
               baselineCost={simulator.metrics.baselineCost}
@@ -38,20 +38,17 @@ export const SimulatorSection = forwardRef<HTMLElement, SimulatorSectionProps>(
             <HybridResultCard simulator={simulator} />
           </div>
 
-          <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="panel p-6 sm:p-8">
+          <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_1fr]">
+            <div className="panel p-5 sm:p-6">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="eyebrow">Comparison</p>
-                  <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white">
+                  <h3 className="mt-2 text-xl font-semibold tracking-[-0.04em] text-white">
                     All-flash baseline vs Scality hybrid
                   </h3>
                 </div>
-                <div className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-300">
-                  5-year illustrative TCO
-                </div>
               </div>
-              <div className="mt-6">
+              <div className="mt-4">
                 <SavingsComparisonChart
                   baselineCost={simulator.metrics.baselineCost}
                   hybridCost={simulator.metrics.hybridCost}
@@ -59,20 +56,20 @@ export const SimulatorSection = forwardRef<HTMLElement, SimulatorSectionProps>(
               </div>
             </div>
 
-            <div className="panel p-6 sm:p-8">
+            <div className="panel p-5 sm:p-6">
               <p className="eyebrow">Workload advisory</p>
-              <div className="mt-5 space-y-3">
-                {simulator.notes.map((note) => (
+              <div className="mt-4 space-y-2">
+                {simulator.notes.slice(0, 2).map((note) => (
                   <div
                     key={note}
-                    className="flex gap-3 rounded-2xl border border-white/8 bg-white/[0.04] px-4 py-4"
+                    className="flex gap-3 rounded-xl border border-white/8 bg-white/[0.04] px-4 py-3"
                   >
                     <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-tape" />
                     <p className="text-sm leading-6 text-slate-200">{note}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 border-t border-white/10 pt-6">
+              <div className="mt-4 border-t border-white/10 pt-4">
                 <AssumptionFootnote />
               </div>
             </div>
@@ -82,4 +79,3 @@ export const SimulatorSection = forwardRef<HTMLElement, SimulatorSectionProps>(
     );
   },
 );
-

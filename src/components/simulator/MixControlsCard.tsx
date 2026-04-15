@@ -21,16 +21,16 @@ const iconMap = {
 
 export function MixControlsCard({ simulator }: MixControlsCardProps) {
   return (
-    <article className="panel flex h-full flex-col p-6 sm:p-8">
-      <div className="flex flex-col gap-5 border-b border-white/10 pb-6">
+    <article className="panel flex h-full flex-col p-5 sm:p-6">
+      <div className="flex flex-col gap-4 border-b border-white/10 pb-5">
         <div>
           <p className="eyebrow">Control plane</p>
-          <h3 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white">
+          <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">
             Media Mix Control
           </h3>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-2 sm:grid-cols-2">
           {useCasePresets.map((preset) => {
             const Icon = iconMap[preset.key];
             const isActive = simulator.selectedUseCase === preset.key;
@@ -40,7 +40,7 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
                 key={preset.key}
                 type="button"
                 onClick={() => simulator.selectUseCase(preset.key)}
-                className={`focus-ring rounded-2xl border px-4 py-4 text-left transition ${
+                className={`focus-ring rounded-xl border px-3 py-3 text-left transition ${
                   isActive
                     ? "border-flash/50 bg-flash/10 shadow-flash"
                     : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
@@ -52,7 +52,7 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
                     {preset.label}
                   </span>
                 </div>
-                <div className="mt-2 text-xs uppercase tracking-[0.22em] text-slate-400">
+                <div className="mt-1 text-xs uppercase tracking-[0.22em] text-slate-400">
                   {preset.key === "custom"
                     ? "Customer-specific model"
                     : `${preset.mix.flash}/${preset.mix.hdd}/${preset.mix.tape}`}
@@ -63,12 +63,12 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-6">
-        <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
+      <div className="mt-5 grid gap-4">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm text-slate-400">Total capacity</p>
-              <div className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">
+              <div className="mt-1 text-3xl font-semibold tracking-[-0.04em] text-white">
                 {formatCapacityPB(simulator.capacityPB)}
               </div>
             </div>
@@ -83,7 +83,7 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
                 onChange={(event) =>
                   simulator.updateCapacity(Number(event.target.value))
                 }
-                className="focus-ring w-24 rounded-xl border border-white/10 bg-ink-900 px-3 py-2 text-right text-white"
+                className="focus-ring w-24 rounded-lg border border-white/10 bg-ink-900 px-3 py-2 text-right text-white"
               />
             </label>
           </div>
@@ -97,7 +97,7 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
             onChange={(event) =>
               simulator.updateCapacity(Number(event.target.value))
             }
-            className="slider mt-5 w-full"
+            className="slider mt-4 w-full"
             style={{
               ["--slider-color" as string]: "#47a9ff",
               ["--fill" as string]: `${
@@ -111,19 +111,16 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
             <span>{formatCapacityPB(MIN_CAPACITY_PB)}</span>
             <span>{formatCapacityPB(MAX_CAPACITY_PB)}</span>
           </div>
-          <p className="mt-3 text-xs leading-5 text-slate-400">
+          <p className="mt-2 text-xs leading-5 text-slate-400">
             Selection snaps to {formatCapacityPB(simulator.capacityStepPB)} steps
             at this scale.
           </p>
         </div>
 
-        <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-sm text-slate-400">Include tape</p>
-              <p className="mt-1 text-sm text-slate-300">
-                Use tape where the workload can tolerate colder tiers.
-              </p>
             </div>
             <button
               type="button"
@@ -144,7 +141,7 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
             </button>
           </div>
 
-          <div className="mt-6 space-y-5">
+          <div className="mt-4 space-y-4">
             <SliderRow
               label="Flash"
               medium="flash"
@@ -171,18 +168,15 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/10 pt-6">
+      <div className="mt-5 flex items-center justify-between gap-4 border-t border-white/10 pt-5">
         <div>
           <p className="text-sm text-white">Adjust your architecture</p>
-          <p className="mt-1 text-sm text-slate-400">
-            Ratios rebalance automatically to keep the mix at 100%.
-          </p>
         </div>
         <button
           type="button"
           onClick={simulator.resetToPreset}
           disabled={!simulator.canReset}
-          className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white transition hover:bg-white/[0.08] disabled:cursor-not-allowed disabled:opacity-40"
+          className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-white transition hover:bg-white/[0.08] disabled:cursor-not-allowed disabled:opacity-40"
         >
           <RotateCcw className="h-4 w-4" />
           Reset to preset

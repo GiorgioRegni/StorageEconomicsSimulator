@@ -17,24 +17,24 @@ export function BaselineCard({
   const baselineCostPerPB = capacityPB === 0 ? 0 : baselineCost / capacityPB;
 
   return (
-    <article className="panel flex h-full flex-col p-6 sm:p-8">
+    <article className="panel flex h-full flex-col p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="eyebrow">Baseline architecture</p>
-          <h3 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white">
+          <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">
             All Flash
           </h3>
         </div>
-        <div className="rounded-full border border-flash/30 bg-flash/10 px-4 py-2 text-sm text-flash">
+        <div className="rounded-full border border-flash/30 bg-flash/10 px-3 py-1.5 text-sm text-flash">
           100% flash
         </div>
       </div>
 
-      <div className="mt-8">
-        <MixStackBar mix={{ flash: 100, hdd: 0, tape: 0 }} />
+      <div className="mt-5">
+        <MixStackBar mix={{ flash: 100, hdd: 0, tape: 0 }} compact />
       </div>
 
-      <div className="mt-8 border-t border-white/10 pt-6">
+      <div className="mt-5 border-t border-white/10 pt-5">
         <div className="text-sm text-slate-400">
           {formatCapacityPB(capacityPB)} deployed
         </div>
@@ -49,9 +49,8 @@ export function BaselineCard({
         </div>
       </div>
 
-      <div className="mt-8 space-y-3 border-t border-white/10 pt-6 text-sm text-slate-200">
+      <div className="mt-5 space-y-2 border-t border-white/10 pt-5 text-sm text-slate-200">
         {[
-          "Max performance",
           "Highest flash dependency",
           "Highest media cost exposure",
         ].map((item) => (

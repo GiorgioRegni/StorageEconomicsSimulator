@@ -11,13 +11,13 @@ interface MixStackBarProps {
 export function MixStackBar({ mix, compact = false }: MixStackBarProps) {
   return (
     <div
-      className={`relative mx-auto w-full max-w-[220px] overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.03] p-4 ${
-        compact ? "h-52" : "h-72"
+      className={`relative mx-auto w-full overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03] p-3 ${
+        compact ? "h-48 max-w-[170px]" : "h-64 max-w-[190px]"
       }`}
       aria-hidden="true"
     >
-      <div className="absolute inset-4 rounded-[22px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))]" />
-      <div className="absolute inset-x-6 bottom-6 top-6 flex flex-col justify-end overflow-hidden rounded-[18px] border border-white/10 bg-[linear-gradient(180deg,rgba(6,11,21,0.88),rgba(18,27,45,0.58))]">
+      <div className="absolute inset-3 rounded-[18px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))]" />
+      <div className="absolute inset-x-5 bottom-5 top-5 flex flex-col justify-end overflow-hidden rounded-[14px] border border-white/10 bg-[linear-gradient(180deg,rgba(6,11,21,0.88),rgba(18,27,45,0.58))]">
         {mediaOrder.map((medium) => {
           const value = mix[medium];
           if (!value) {
@@ -47,8 +47,7 @@ export function MixStackBar({ mix, compact = false }: MixStackBarProps) {
           );
         })}
       </div>
-      <div className="absolute inset-x-8 bottom-4 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <div className="absolute inset-x-7 bottom-3 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
     </div>
   );
 }
-

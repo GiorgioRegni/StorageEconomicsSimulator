@@ -25,7 +25,7 @@ export function SavingsComparisonChart({
   ];
 
   return (
-    <div className="h-60 w-full">
+    <div className="h-44 w-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
@@ -62,7 +62,7 @@ export function SavingsComparisonChart({
               color: "#eef4ff",
             }}
           />
-          <Bar dataKey="value" radius={[0, 14, 14, 0]} barSize={24}>
+          <Bar dataKey="value" radius={[0, 10, 10, 0]} barSize={20}>
             {data.map((entry) => (
               <Cell key={entry.name} fill={entry.fill} />
             ))}
@@ -72,4 +72,3 @@ export function SavingsComparisonChart({
     </div>
   );
 }
-
