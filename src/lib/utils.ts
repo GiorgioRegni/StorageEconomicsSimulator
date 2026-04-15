@@ -9,7 +9,15 @@ export function formatCurrencyCompact(value: number) {
     style: "currency",
     currency: "USD",
     notation: "compact",
-    maximumFractionDigits: 1,
+    maximumFractionDigits: 2,
+  }).format(value);
+}
+
+export function formatCurrencyPerUnit(value: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
   }).format(value);
 }
 

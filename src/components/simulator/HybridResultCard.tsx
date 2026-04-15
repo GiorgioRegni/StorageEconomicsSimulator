@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { SimulatorState } from "../../hooks/useSimulator";
+import { formatCurrencyPerUnit } from "../../lib/utils";
 import { MixStackBar } from "../charts/MixStackBar";
 import { AnimatedNumber } from "../ui/AnimatedNumber";
 
@@ -8,6 +9,11 @@ interface HybridResultCardProps {
 }
 
 export function HybridResultCard({ simulator }: HybridResultCardProps) {
+  const hybridCostPerPB =
+    simulator.capacityPB === 0
+      ? 0
+      : simulator.metrics.hybridCost / simulator.capacityPB;
+
   return (
     <article className="panel relative flex h-full flex-col overflow-hidden p-6 sm:p-8">
       <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(71,169,255,0.2),transparent_72%)] blur-2xl" />
@@ -49,6 +55,9 @@ export function HybridResultCard({ simulator }: HybridResultCardProps) {
           />{" "}
           saved versus the all-flash baseline
         </div>
+        <div className="mt-3 text-sm text-slate-400">
+          {formatCurrencyPerUnit(hybridCostPerPB)} per PB
+        </div>
       </div>
 
       <div className="mt-8 space-y-3 border-t border-white/10 pt-6 text-sm text-slate-200">
@@ -66,4 +75,3 @@ export function HybridResultCard({ simulator }: HybridResultCardProps) {
     </article>
   );
 }
-

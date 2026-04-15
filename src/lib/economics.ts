@@ -1,6 +1,7 @@
 import {
   MAX_CAPACITY_PB,
   MIN_CAPACITY_PB,
+  PB_PER_EB,
   modelAssumptions,
   TB_PER_PB,
 } from "../data/assumptions";
@@ -74,6 +75,31 @@ export function clampCapacity(value: number) {
     return 10;
   }
 
+  const bounded = clampCapacityBounds(value);
+  const step = getCapacityStepPB(bounded);
+
+  return clampCapacityBounds(Math.round(bounded / step) * step);
+}
+
+export function getCapacityStepPB(value: number) {
+  const bounded = clampCapacityBounds(value);
+
+  if (bounded <= 10) {
+    return 1;
+  }
+
+  if (bounded <= 100) {
+    return 5;
+  }
+
+  if (bounded <= PB_PER_EB) {
+    return 50;
+  }
+
+  return 500;
+}
+
+function clampCapacityBounds(value: number) {
   return Math.min(
     MAX_CAPACITY_PB,
     Math.max(MIN_CAPACITY_PB, Math.round(value)),

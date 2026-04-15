@@ -111,6 +111,10 @@ export function MixControlsCard({ simulator }: MixControlsCardProps) {
             <span>{formatCapacityPB(MIN_CAPACITY_PB)}</span>
             <span>{formatCapacityPB(MAX_CAPACITY_PB)}</span>
           </div>
+          <p className="mt-3 text-xs leading-5 text-slate-400">
+            Selection snaps to {formatCapacityPB(simulator.capacityStepPB)} steps
+            at this scale.
+          </p>
         </div>
 
         <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">

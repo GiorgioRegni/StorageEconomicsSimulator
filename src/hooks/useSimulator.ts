@@ -5,6 +5,7 @@ import {
   UseCaseKey,
   calculateEconomics,
   clampCapacity,
+  getCapacityStepPB,
   getAdvisoryNotes,
   isMixEqual,
   rebalanceMix,
@@ -18,6 +19,7 @@ const backupPreset = useCasePresets.find((preset) => preset.key === "backup")!;
 export interface SimulatorState {
   selectedUseCase: UseCaseKey;
   capacityPB: number;
+  capacityStepPB: number;
   mix: MediaMix;
   includeTape: boolean;
   metrics: ReturnType<typeof calculateEconomics>;
@@ -40,6 +42,7 @@ export function useSimulator(): SimulatorState {
   const activePreset =
     useCasePresets.find((preset) => preset.key === selectedUseCase) ?? backupPreset;
   const metrics = calculateEconomics(capacityPB, mix);
+  const capacityStepPB = getCapacityStepPB(capacityPB);
   const notes = getAdvisoryNotes(selectedUseCase, mix, includeTape);
   const canReset =
     selectedUseCase !== "custom" &&
@@ -82,6 +85,7 @@ export function useSimulator(): SimulatorState {
   return {
     selectedUseCase,
     capacityPB,
+    capacityStepPB,
     mix,
     includeTape,
     metrics,
@@ -95,4 +99,3 @@ export function useSimulator(): SimulatorState {
     resetToPreset,
   };
 }
-

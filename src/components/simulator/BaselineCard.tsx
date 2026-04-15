@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { formatCapacityPB } from "../../lib/utils";
+import { formatCapacityPB, formatCurrencyPerUnit } from "../../lib/utils";
 import { MixStackBar } from "../charts/MixStackBar";
 import { AnimatedNumber } from "../ui/AnimatedNumber";
 
@@ -14,6 +14,8 @@ export function BaselineCard({
   baselineCost,
   formatCurrency,
 }: BaselineCardProps) {
+  const baselineCostPerPB = capacityPB === 0 ? 0 : baselineCost / capacityPB;
+
   return (
     <article className="panel flex h-full flex-col p-6 sm:p-8">
       <div className="flex items-start justify-between gap-4">
@@ -41,6 +43,9 @@ export function BaselineCard({
         </div>
         <div className="mt-1 text-sm uppercase tracking-[0.24em] text-slate-500">
           5-year TCO
+        </div>
+        <div className="mt-3 text-sm text-slate-400">
+          {formatCurrencyPerUnit(baselineCostPerPB)} per PB
         </div>
       </div>
 
