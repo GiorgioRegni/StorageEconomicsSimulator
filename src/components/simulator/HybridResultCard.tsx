@@ -41,6 +41,9 @@ export function HybridResultCard({ simulator }: HybridResultCardProps) {
             formatter={simulator.formatCurrency}
           />
         </div>
+        <div className="mt-1 text-sm uppercase tracking-[0.24em] text-slate-500">
+          5-year TCO
+        </div>
         <div className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-success">
           <AnimatedNumber
             value={simulator.metrics.savingsPercent}
